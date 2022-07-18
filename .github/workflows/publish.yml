@@ -1,0 +1,30 @@
+name: CI
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [develop]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "v15.8.0"
+
+      - name: Build and Push
+        run: |
+          npm install
+          npm run build
+          cd dist
+          echo "chienleptn.github.io" > CNAME
+          git init
+          git config --global user.email "chien.le@ptnglobalcorp.com"
+          git config --global user.name "chienleptn"
+          git add .
+          git commit -m "Build"
+          git push -f https://chienleptn:${{ secrets.GITHUB_TOKEN }}@github.com/chienleptn/chienleptn.github.io.git main
