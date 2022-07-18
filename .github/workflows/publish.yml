@@ -27,4 +27,4 @@ jobs:
           git config --global user.name "chienleptn"
           git add .
           git commit -m "Build"
-          git push -f https://chienleptn:${{ secrets.GITHUB_TOKEN }}@github.com/chienleptn/chienleptn.github.io.git main
+          git push -f https://chienleptn:${{ secrets.GITHUB_TOKEN }}@github.com/chienleptn/chienleptn.github.io.git master:main
